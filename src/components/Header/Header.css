@@ -1,16 +1,90 @@
 header.header {
-  width: 100%;
   padding: 0 45px;
-  height: 75px;
+  min-height: 75px;
   line-height: 75px;
   background-color: #212121;
   display: grid;
-  grid-template-columns: 200px 1fr;
+  grid-template-columns: 200px 1fr 200px;
+  grid-template-areas: "header-logo header-controls";
   align-content: center;
+  align-items: center;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.25);
+}
+
+@media screen and (max-width: 900px) {
+  header.header {
+    padding: 0 45px;
+    grid-template-columns: 200px 1fr;
+    grid-template-areas:
+      "header-logo header-logo"
+      "header-controls header-controls";
+  }
+
+  .header-controls {
+    justify-self: start !important;
+    align-self: left;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  button.header-pure-button-red {
+    display: block;
+    margin-left: 0px !important;
+    margin-bottom: 30px;
+  }
+}
+
+.header-logo {
+  grid-area: header-logo;
+}
+.header-controls {
+  grid-area: header-controls;
+  justify-self: center;
+  align-self: center;
+}
+
+.header-controls span {
+  color: #bdbdbd;
+  padding-right: 6px;
+}
+.header-controls button {
+  margin-top: -5px;
+  margin-left: 16px;
 }
 
 header.header img {
   height: 57px;
   width: auto;
+}
+
+select.header-deck-size-select {
+  margin-top: 16px;
+  width: 125px;
+  height: 48px;
+  box-sizing: border-box;
+  padding-left: 25px;
+  font-size: 24px;
+  -moz-appearance: none; /* Firefox */
+  -webkit-appearance: none; /* Safari and Chrome */
+  appearance: none;
+  background-color: white;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  background-image: url("data:image/svg+xml,%3Csvg width='18px' height='18px' aria-hidden='true' focusable='false' data-prefix='fas' data-icon='caret-down' class='svg-inline--fa fa-caret-down fa-w-10' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 512'%3E%3Cpath fill='%23999' d='M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z'%3E%3C/path%3E%3C/svg%3E");
+  background-size: 0.6em;
+  background-position: calc(100% - 1.3em) center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+button.header-pure-button-red {
+  text-transform: uppercase;
+  height: 48px;
+  width: 220px;
+  font-weight: 500;
+  font-size: 20px;
+  text-transform: uppercase;
+  background-color: #ff3000;
+  color: white;
+  border-radius: 2px;
 }

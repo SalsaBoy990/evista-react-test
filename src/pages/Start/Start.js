@@ -3,15 +3,17 @@ import "./Start.css";
 
 import Header from "../../components/Header/Header";
 
+import numberOfPairs from "../../data/numberOfPairs";
+
 class Start extends React.Component {
   render() {
     const title = "Splendex Memory Game";
-
-    const cardPairs = [3, 4, 5, 6, 7, 8, 9, 10];
+    const page = "start";
+    const cardPairs = numberOfPairs;
 
     return (
       <>
-        <Header></Header>
+        <Header page={page}></Header>
         <main className="start-container">
           <h1 className="start-title">{title}</h1>
           <p className="start-deck-size-label">Deck Size</p>
