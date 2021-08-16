@@ -4,8 +4,27 @@ import "./Header.css";
 import evistaLogo from "./evista.png";
 
 class Header extends React.Component {
+  state = {
+    currentNumberOfPairs: "",
+  };
+
+  componentDidMount() {
+    this.setState({
+      currentNumberOfPairs: this.props.currentNumberOfPairs,
+    });
+  }
+
+  startGame = () => {};
+
+  handleChange = (event) => {
+    this.setState({
+      currentNumberOfPairs: event.target.value,
+    });
+  };
+
   render() {
     const numberOfPairs = this.props.numberOfPairs;
+    const currentNumberOfPairs = this.state.currentNumberOfPairs;
 
     return (
       <header className="header">
@@ -13,25 +32,32 @@ class Header extends React.Component {
 
         {this.props.page === "app" && (
           <div className="header-controls">
-            <span>Deck size: </span>
+            <form action="" onSubmit={this.startGame}>
+              <span>Deck size: </span>
 
-            <select
-              className="header-deck-size-select"
-              name="numberOfPairs"
-              id=""
-            >
-              {numberOfPairs.map((number) => {
-                return (
-                  <option key={"pairs-" + number} value={number}>
-                    {number}
-                  </option>
-                );
-              })}
-            </select>
+              <select
+                className="header-deck-size-select"
+                name="numberOfPairs"
+                id=""
+                value={currentNumberOfPairs}
+                onChange={this.handleChange}
+              >
+                {numberOfPairs.map((number) => {
+                  return (
+                    <option key={"pairs-" + number} value={number}>
+                      {number}
+                    </option>
+                  );
+                })}
+              </select>
 
-            <button className="pure-button header-pure-button-red">
-              Start New Game
-            </button>
+              <button
+                type="submit"
+                className="pure-button header-pure-button-red"
+              >
+                Start New Game
+              </button>
+            </form>
           </div>
         )}
       </header>
