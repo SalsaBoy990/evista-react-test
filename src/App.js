@@ -14,7 +14,7 @@ class App extends React.Component {
     currentTries: 0,
     currentNumberOfPairs: null,
     remainingNumberOfPairs: null,
-    bestResult: null,
+    bestResult: "",
     cardSelected1: {},
     cardSelected2: {},
     selectedCardCount: 0,
@@ -24,12 +24,18 @@ class App extends React.Component {
   componentDidMount() {
     const numberOfPairs = parseInt(this.props.match.params.numberOfCards);
     this.startGame(numberOfPairs);
+
+    // save state locally
+    localStorage.setItem("state", JSON.stringify(this.state));
   }
 
   componentDidUpdate() {
     if (this.state.selectedCardCount === 2) {
       this.compareCardsClicked();
     }
+
+    // save state locally when updating
+    localStorage.setItem("state", JSON.stringify(this.state));
   }
 
   // Start game, initialize state
@@ -56,21 +62,31 @@ class App extends React.Component {
     // Simple randomizing array
     newCards = newCards.sort((a, b) => 0.5 - Math.random());
 
+    // store best result in local storage
+    const bestResult = localStorage.getItem("bestResult");
+
+    // save state locally
+    const localState = JSON.parse(localStorage.getItem("state"));
+
     this.setState({
-      deckSizes: deckSizes,
-      cards: newCards,
-      currentTries: 0,
-      currentNumberOfPairs: pairs,
-      remainingNumberOfPairs: pairs,
-      bestResult: null,
-      cardSelected1: {},
-      cardSelected2: {},
-      selectedCardCount: 0,
+      deckSizes: (localState && localState.deckSizes) || deckSizes,
+      cards: (localState && localState.cards) || newCards,
+      currentTries: (localState && localState.currentTries) || 0,
+      currentNumberOfPairs:
+        (localState && localState.currentNumberOfPairs) || pairs,
+      remainingNumberOfPairs:
+        (localState && localState.currentNumberOfPairs) || pairs,
+      bestResult: bestResult || "",
+      cardSelected1: (localState && localState.cardSelected1) || {},
+      cardSelected2: (localState && localState.cardSelected2) || {},
+      selectedCardCount: (localState && localState.selectedCardCount) || 0,
     });
   };
 
   // Restarting game (button)
   restartGame = () => {
+    // delete local storage, we want to restart
+    localStorage.setItem("state", null);
     this.startGame(this.state.currentNumberOfPairs);
   };
 
@@ -104,7 +120,7 @@ class App extends React.Component {
     const tries = this.state.currentTries + 1;
     const remaining = this.state.remainingNumberOfPairs - 1;
 
-    const bestResult = this.state.bestResult;
+    let bestResult = this.state.bestResult;
 
     // check if there is a match
     if (cardName1 === cardName2) {
@@ -140,13 +156,19 @@ class App extends React.Component {
 
     if (remaining === 0) {
       if (bestResult) {
+        bestResult = tries <= bestResult ? tries : bestResult;
         this.setState({
-          bestResult: tries <= bestResult ? tries : bestResult,
+          bestResult: bestResult,
         });
+
+        // store best result in local storage
+        localStorage.setItem("bestResult", bestResult);
       } else {
         this.setState({
           bestResult: tries,
         });
+        // store best result in local storage
+        localStorage.setItem("bestResult", tries);
       }
 
       setTimeout(() => {

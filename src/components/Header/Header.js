@@ -20,6 +20,10 @@ class Header extends React.Component {
     event.preventDefault();
 
     const numberOfCards = this.inputPairs.current.value;
+
+    // delete local storage, we want to have a new game
+    localStorage.setItem("state", null);
+
     this.props.startGame(numberOfCards);
   };
 
