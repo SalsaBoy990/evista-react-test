@@ -1,1 +1,102 @@
+main.app-container {
+  margin-top: 24px;
+  margin-left: 286px;
+  margin-right: 286px;
+  margin-bottom: 60px;
+}
 
+@media screen and (max-width: 1439px) {
+  main.app-container {
+    margin-left: 100px;
+    margin-right: 100px;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  main.app-container {
+    margin-left: 60px;
+    margin-right: 60px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  main.app-container {
+    margin-left: 36px;
+    margin-right: 36px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  main.app-container {
+    margin-left: 24px;
+    margin-right: 24px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  main.app-container {
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+}
+
+.top-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.current-tries {
+  align-self: left;
+  color: gray;
+}
+.current-tries > span {
+  color: black;
+  font-size: 20px;
+  display: inline-block;
+  position: relative;
+  top: 2px;
+}
+
+.best-result {
+  justify-self: center;
+  color: gray;
+  text-align: center;
+}
+.best-result span {
+  color: black;
+  font-size: 44px;
+}
+
+.restart-button {
+  justify-self: right;
+  text-transform: uppercase;
+  height: 50px;
+  width: 136px;
+  padding-top: 12px;
+  box-sizing: border-box;
+  font-weight: 500;
+  font-size: 20px;
+  text-transform: uppercase;
+  background-color: white;
+  color: black;
+  border: 3px solid gray;
+  border-radius: 4px;
+}
+
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 160px);
+  justify-items: stretch;
+  align-items: space-between;
+  column-gap: 16px;
+  row-gap: 15px;
+}
+
+@media screen and (max-width: 400px) {
+  .cards-container {
+    grid-template-columns: repeat(auto-fit, 150px);
+  }
+}
