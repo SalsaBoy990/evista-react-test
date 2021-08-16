@@ -4,8 +4,34 @@ import "./Header.css";
 import evistaLogo from "./evista.png";
 
 class Header extends React.Component {
+  inputPairs = React.createRef();
+
+  state = {
+    currentNumberOfPairs: "",
+  };
+
+  componentDidMount() {
+    this.setState({
+      currentNumberOfPairs: this.props.currentNumberOfPairs,
+    });
+  }
+
+  startGame = (event) => {
+    event.preventDefault();
+
+    const numberOfCards = this.inputPairs.current.value;
+    this.props.startGame(numberOfCards);
+  };
+
+  handleChange = (event) => {
+    this.setState({
+      currentNumberOfPairs: event.target.value,
+    });
+  };
+
   render() {
-    const numberOfPairs = this.props.numberOfPairs;
+    const deckSizes = this.props.deckSizes;
+    const currentNumberOfPairs = this.state.currentNumberOfPairs;
 
     return (
       <header className="header">
@@ -13,25 +39,33 @@ class Header extends React.Component {
 
         {this.props.page === "app" && (
           <div className="header-controls">
-            <span>Deck size: </span>
+            <form action="" onSubmit={this.startGame}>
+              <span>Deck size: </span>
 
-            <select
-              className="header-deck-size-select"
-              name="numberOfPairs"
-              id=""
-            >
-              {numberOfPairs.map((number) => {
-                return (
-                  <option key={"pairs-" + number} value={number}>
-                    {number}
-                  </option>
-                );
-              })}
-            </select>
+              <select
+                className="header-deck-size-select"
+                name="numberOfPairs"
+                id=""
+                ref={this.inputPairs}
+                value={currentNumberOfPairs || ""}
+                onChange={this.handleChange}
+              >
+                {deckSizes.map((number) => {
+                  return (
+                    <option key={"pairs-" + number} value={number}>
+                      {number}
+                    </option>
+                  );
+                })}
+              </select>
 
-            <button className="pure-button header-pure-button-red">
-              Start New Game
-            </button>
+              <button
+                type="submit"
+                className="pure-button header-pure-button-red"
+              >
+                Start New Game
+              </button>
+            </form>
           </div>
         )}
       </header>

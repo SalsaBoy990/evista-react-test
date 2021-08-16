@@ -1,54 +1,64 @@
-const cards = {
-  angular: {
+const cards = [
+  {
     name: "angular",
     image: "angular.png",
-    matched: true,
+    matched: false,
+    clicked: false,
   },
-  d3: {
+  {
     name: "d3",
     image: "d3.png",
     matched: false,
+    clicked: false,
   },
-  evista: {
+  {
     name: "evista",
     image: "evista.png",
     matched: false,
+    clicked: false,
   },
-  jenkins: {
+  {
     name: "jenkins",
     image: "jenkins.png",
     matched: false,
+    clicked: false,
   },
-  postcss: {
+  {
     name: "postcss",
     image: "postcss.png",
     matched: false,
+    clicked: false,
   },
-  react: {
+  {
     name: "react",
     image: "react.png",
     matched: false,
+    clicked: false,
   },
-  redux: {
+  {
     name: "redux",
     image: "redux.png",
     matched: false,
+    clicked: false,
   },
-  sass: {
+  {
     name: "sass",
     image: "sass.png",
     matched: false,
+    clicked: false,
   },
-  ts: {
+  {
     name: "ts",
     image: "ts.png",
     matched: false,
+    clicked: false,
   },
-  webpack: {
+  {
     name: "webpack",
     image: "webpack.png",
     matched: false,
+    clicked: false,
   },
-};
+];
 
 export default cards;
