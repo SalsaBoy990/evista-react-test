@@ -4,6 +4,8 @@ import "./Header.css";
 import evistaLogo from "./evista.png";
 
 class Header extends React.Component {
+  inputPairs = React.createRef();
+
   state = {
     currentNumberOfPairs: "",
   };
@@ -14,7 +16,12 @@ class Header extends React.Component {
     });
   }
 
-  startGame = () => {};
+  startGame = (event) => {
+    event.preventDefault();
+
+    const numberOfCards = this.inputPairs.current.value;
+    this.props.startGame(numberOfCards);
+  };
 
   handleChange = (event) => {
     this.setState({
@@ -23,7 +30,7 @@ class Header extends React.Component {
   };
 
   render() {
-    const numberOfPairs = this.props.numberOfPairs;
+    const deckSizes = this.props.deckSizes;
     const currentNumberOfPairs = this.state.currentNumberOfPairs;
 
     return (
@@ -39,10 +46,11 @@ class Header extends React.Component {
                 className="header-deck-size-select"
                 name="numberOfPairs"
                 id=""
-                value={currentNumberOfPairs}
+                ref={this.inputPairs}
+                value={currentNumberOfPairs || ""}
                 onChange={this.handleChange}
               >
-                {numberOfPairs.map((number) => {
+                {deckSizes.map((number) => {
                   return (
                     <option key={"pairs-" + number} value={number}>
                       {number}

@@ -3,27 +3,26 @@ import React from "react";
 import "./Card.css";
 
 class Card extends React.Component {
-  state = {
-    clicked: false,
-  };
-
   cardClicked = () => {
-    const clicked = this.state.clicked ? false : true;
-    this.setState({
-      clicked,
-    });
+    // if already matched, do not proceed
+    if (this.props.card.matched === true) {
+      return;
+    }
+    this.props.card.clicked = true;
+    this.props.handleCardClicked(this.props.card, this.props.card.index);
   };
 
   render() {
     return (
       <div
+        disabled={this.props.card.matched}
         onClick={this.cardClicked}
         className={this.props.card.matched ? "card card-matched" : "card"}
       >
         <img
           src={"/images/cards/" + this.props.card.image}
           alt={this.props.card.name}
-          className={this.state.clicked ? "show" : "hide"}
+          className={this.props.card.clicked ? "show" : "hide"}
         />
       </div>
     );

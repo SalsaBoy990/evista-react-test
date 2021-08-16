@@ -1,9 +1,7 @@
 import React from "react";
 import "./Start.css";
-
 import Header from "../../components/Header/Header";
-
-import numberOfPairs from "../../data/numberOfPairs";
+import deckSizes from "../../data/sizes";
 
 class Start extends React.Component {
   inputPairs = React.createRef();
@@ -12,7 +10,6 @@ class Start extends React.Component {
     event.preventDefault();
 
     const numberOfCards = this.inputPairs.current.value;
-
     // navigate to
     this.props.history.push(`/play/${numberOfCards}`);
   };
@@ -20,7 +17,6 @@ class Start extends React.Component {
   render() {
     const title = "Splendex Memory Game";
     const page = "start";
-    const cardPairs = numberOfPairs;
 
     return (
       <>
@@ -34,7 +30,7 @@ class Start extends React.Component {
               name="deck-size"
               ref={this.inputPairs}
             >
-              {cardPairs.map((number) => {
+              {deckSizes.map((number) => {
                 return (
                   <option key={"pairs-" + number} value={number}>
                     {number}
