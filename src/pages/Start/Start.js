@@ -48,6 +48,19 @@ class Start extends React.Component {
               Start New Game
             </button>
           </form>
+
+          <h2 style={{ color: "gray" }}>Card-matching game rules</h2>
+          <ul style={{ color: "gray" }}>
+            <li>Present the user with an even number of cards, “face down”.</li>
+            <li>
+              When the user clicks a card, “flip it over” and reveal the hidden
+              image.
+            </li>
+            <li>When two cards are revealed:</li>
+            <li>If the cards are identical, they are removed from play.</li>
+            <li>If they are not, they will flip back.</li>
+            <li>The game ends when all the cards are removed.</li>
+          </ul>
         </main>
       </>
     );
