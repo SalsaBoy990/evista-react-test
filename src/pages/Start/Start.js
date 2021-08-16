@@ -9,6 +9,8 @@ class Start extends React.Component {
   enterGame = (event) => {
     event.preventDefault();
 
+    // delete local storage, we want a new game
+    localStorage.setItem("state", null);
     const numberOfCards = this.inputPairs.current.value;
     // navigate to
     this.props.history.push(`/play/${numberOfCards}`);
